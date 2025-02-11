@@ -45,7 +45,7 @@ export function Navbar() {
     }, []);
 
     return (
-        <nav className="fixed top-0 w-full bg-transparent z-50">
+        <nav className="fixed top-0 w-full bg-transparent z-50 pt-3">
             <div className="flex items-center justify-between px-4 py-2 max-w-7xl mx-auto">
                 <div className="flex items-center gap-8">
                     <Link href="/browse" className="flex items-center">
@@ -82,7 +82,6 @@ export function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-4">
-
                     <div className="relative" ref={searchRef}>
                         <AnimatePresence>
                             {isSearchOpen && (
@@ -114,7 +113,7 @@ export function Navbar() {
                     </div>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="relative p-2 hover:bg-white/10 rounded-full transition focus:outline-none">
+                        <DropdownMenuTrigger className="relative p-2 hover:bg-white/10 rounded-full transition focus:outline-none ">
                             <Bell className="h-5 w-5" />
                             <span className="absolute top-0 right-0 h-4 w-4 bg-red-600 rounded-full text-[10px] flex items-center justify-center">
                                 1
@@ -123,7 +122,7 @@ export function Navbar() {
                         <DropdownMenuContent align="end" className="w-72">
                             <DropdownMenuItem className="cursor-default">
                                 <div className="flex flex-col gap-1">
-                                    <p className="font-medium">Made by Paul</p>
+                                    <p className="font-medium">Hope you like it - Paul</p>
                                     <p className="text-xs text-neutral-400">
                                         Just now
                                     </p>
@@ -133,7 +132,7 @@ export function Navbar() {
                     </DropdownMenu>
 
                     <DropdownMenu>
-                        <DropdownMenuTrigger className="flex items-center gap-2 focus:outline-none">
+                        <DropdownMenuTrigger className="flex items-center gap-2 focus:outline-none pl-1 ">
                             <div className="relative w-8 h-8 overflow-hidden rounded">
                                 <Image
                                     src={currentProfile.image}
