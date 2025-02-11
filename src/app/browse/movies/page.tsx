@@ -1,7 +1,7 @@
 import { getPopularMovies, getTrendingMovies } from '@/lib/tmdb';
 import { Suspense } from "react";
-import HeroSection from "../_components/hero-section";
-import { MediaGrid } from "../_components/media-grid";
+import HeroSection from "../../_components/hero-section";
+import { MediaGrid } from "../../_components/media-grid";
 
 async function MoviesPage() {
     const popularMoviesPromise = getPopularMovies();

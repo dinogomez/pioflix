@@ -2,7 +2,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Movie } from '@/types/movie';
 import { Show } from '@/types/show';
 import { Star, ThumbsUp } from 'lucide-react';
-import Image from 'next/image';
+import ImageFallback from "./ImageFallback";
 
 interface MovieCardProps {
     movie: Movie | Show;
@@ -19,13 +19,14 @@ export default function MovieCard({ movie }: MovieCardProps) {
         <div className="relative group cursor-pointer">
             <div className="relative z-10 transition-transform duration-300 group-hover:scale-125 group-hover:z-20">
                 <AspectRatio ratio={2 / 3}>
-                    <Image
+                    <ImageFallback
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={title ? title : "Movie/Show"}
                         fill
                         className="rounded-t-lg object-cover"
                         placeholder="blur"
                         blurDataURL="/load.png"
+                        fallbackSrc={"/image-fail.png"}
                     />
                 </AspectRatio>
                 <div className="absolute w-full invisible group-hover:visible transform 
@@ -40,12 +41,14 @@ export default function MovieCard({ movie }: MovieCardProps) {
                             )}
                         </h3>
                         <div className="mt-1 flex items-center text-muted-foreground text-sm">
-                            <span>{year}</span>
-                            <span className="flex items-center ml-4">
+                            {isNaN(year) ? null : <span className="mr-4">{year}</span>}
+                            <span className="flex items-center">
                                 <Star className="w-4 h-4" />
-                                <span className=" ml-1">
-                                    {movie.vote_average.toFixed(1)}
-                                </span>
+                                {movie.vote_average !== undefined && (
+                                    <span className="ml-1">
+                                        {movie.vote_average.toFixed(1)}
+                                    </span>
+                                )}
                             </span>
                             <span className="flex items-center ml-4">
                                 <ThumbsUp className="w-4 h-4" />
