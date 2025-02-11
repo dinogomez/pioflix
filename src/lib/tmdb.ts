@@ -28,3 +28,11 @@ export async function getTrendingTv() {
   const data = await res.json();
   return data.results;
 }
+
+export async function getSearchResults(query: string) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/search?query=${query}`
+  );
+  const data = await res.json();
+  return data;
+}

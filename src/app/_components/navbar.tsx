@@ -8,11 +8,13 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import { useDebounce } from "@/hooks/use-debounce";
 import { profiles } from "@/lib/profiles";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bell, ChevronDown, Search, X } from "lucide-react";
 import { Link } from 'next-view-transitions';
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useEffect, useRef, useState } from "react";
 
@@ -23,7 +25,10 @@ export function Navbar() {
         parseAsInteger.withDefault(1)
     );
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useQueryState('q')
+    const router = useRouter()
     const searchRef = useRef<HTMLDivElement>(null);
+    const debouncedSearch = useDebounce(searchQuery, 500)
 
     const currentProfile = profiles.find((p) => p.id === profileId) || profiles[0];
     const otherProfiles = profiles.filter((p) => p.id !== currentProfile.id);
@@ -43,6 +48,12 @@ export function Navbar() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        if (debouncedSearch) {
+            router.push(`/browse/search?q=${debouncedSearch}`)
+        }
+    }, [debouncedSearch, router])
 
     return (
         <nav className="fixed top-0 w-full bg-background z-50 py-2">
@@ -94,8 +105,10 @@ export function Navbar() {
                                 >
                                     <Input
                                         className="w-full bg-neutral-900/90 border-neutral-700 text-white placeholder:text-neutral-400 focus-visible:ring-neutral-100"
-                                        placeholder="Titles, people, genres"
+                                        placeholder="Titles, Movies, TV Shows"
+                                        value={searchQuery || ''}
                                         autoFocus
+                                        onChange={(e) => setSearchQuery(e.target.value)}
                                     />
                                 </motion.div>
                             )}
