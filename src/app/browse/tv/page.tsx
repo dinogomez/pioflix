@@ -1,3 +1,4 @@
+import { ImageWithFallback } from '@/components/image-w-fallback';
 import { getPopularTv, getTrendingTv } from '@/lib/tmdb';
 import { Show } from '@/types/show';
 import MovieCard from '../_components/movie-card';
@@ -12,9 +13,12 @@ async function TvPage() {
         <main className="min-h-screen bg-background pt-5">
             <section className="relative h-[40vh] w-full">
                 <div className="relative h-full w-full">
-                    <img
+                    <ImageWithFallback
                         src={`https://image.tmdb.org/t/p/original${randomHeroShow.backdrop_path}`}
                         alt={randomHeroShow.name}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
                         className="w-full h-full object-cover rounded-md"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
