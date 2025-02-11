@@ -1,6 +1,6 @@
 import { getPopularMovies, getPopularTv } from '@/lib/tmdb';
-import Image from "next/image";
 import { Suspense } from "react";
+import HeroSection from "./_components/hero-section";
 import { MediaGrid } from "./_components/media-grid";
 
 async function BrowsePage() {
@@ -17,28 +17,11 @@ async function BrowsePage() {
 
     return (
         <main className="min-h-screen bg-background pt-5">
-            <section className="relative h-[40vh] w-full">
-                <div className="relative h-full w-full">
-                    <Image
-                        src={`https://image.tmdb.org/t/p/original${randomHeroContent.backdrop_path}`}
-                        alt={randomHeroContent.title ? randomHeroContent.title : "Hero Poster"}
-                        width={0}
-                        height={0}
-                        sizes="100vw"
-                        className="w-full h-full object-cover rounded-md"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
-                    <div className="absolute bottom-0 left-0 p-8">
-                        <h1 className="text-4xl font-bold mb-4">
-                            {randomHeroContent.title || "Featured Content"}
-                        </h1>
-                        <p className="text-lg max-w-2xl line-clamp-3">
-                            {randomHeroContent.overview || "No overview available"}
-                        </p>
-                    </div>
-                </div>
-            </section>
-
+            <HeroSection
+                imageSrc={`https://image.tmdb.org/t/p/original${randomHeroContent.backdrop_path}`}
+                title={randomHeroContent.title || randomHeroContent.name}
+                overview={randomHeroContent.overview}
+            />
             <Suspense fallback={<MediaGrid title="Popular Movies" items={[]} limit={8} isLoading={true} />}>
                 <MediaGrid
                     title="Popular Movies"
@@ -46,7 +29,6 @@ async function BrowsePage() {
                     limit={8}
                 />
             </Suspense>
-
             <Suspense fallback={<MediaGrid title="Popular TV Shows" items={[]} limit={8} isLoading={true} />}>
                 <MediaGrid
                     title="Popular TV Shows"

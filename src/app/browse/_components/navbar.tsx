@@ -1,6 +1,5 @@
 "use client";
 
-import { profiles } from "@/app/_data/profiles";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -9,6 +8,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import { profiles } from "@/lib/profiles";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bell, ChevronDown, Search, X } from "lucide-react";
 import { Link } from 'next-view-transitions';
@@ -45,7 +45,7 @@ export function Navbar() {
     }, []);
 
     return (
-        <nav className="fixed top-0 w-full bg-transparent z-50 pt-3">
+        <nav className="fixed top-0 w-full bg-background z-50 py-2">
             <div className="flex items-center justify-between px-4 py-2 max-w-7xl mx-auto">
                 <div className="flex items-center gap-8">
                     <Link href="/browse" className="flex items-center">
