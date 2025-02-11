@@ -1,11 +1,16 @@
-import { ImageWithFallback } from '@/components/image-w-fallback';
 import { getPopularTv, getTrendingTv } from '@/lib/tmdb';
-import { Show } from '@/types/show';
-import MovieCard from '../_components/movie-card';
+import Image from "next/image";
+import { Suspense } from "react";
+import { MediaGrid } from "../_components/media-grid";
 
 async function TvPage() {
-    const popularTv: Show[] = await getPopularTv();
-    const trendingTv = await getTrendingTv();
+    const popularTvPromise = getPopularTv();
+    const trendingTvPromise = getTrendingTv();
+
+    const [popularTv, trendingTv] = await Promise.all([
+        popularTvPromise,
+        trendingTvPromise
+    ]);
 
     const randomHeroShow = popularTv[Math.floor(Math.random() * popularTv.length)];
 
@@ -13,9 +18,9 @@ async function TvPage() {
         <main className="min-h-screen bg-background pt-5">
             <section className="relative h-[40vh] w-full">
                 <div className="relative h-full w-full">
-                    <ImageWithFallback
+                    <Image
                         src={`https://image.tmdb.org/t/p/original${randomHeroShow.backdrop_path}`}
-                        alt={randomHeroShow.name}
+                        alt={randomHeroShow.name ? randomHeroShow.name : "Movie/Show"}
                         width={0}
                         height={0}
                         sizes="100vw"
@@ -33,23 +38,19 @@ async function TvPage() {
                 </div>
             </section>
 
-            <section className="px-4 py-8">
-                <h2 className="text-2xl font-bold mb-4">Popular TV Shows</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {popularTv.map((show: Show) => (
-                        <MovieCard key={show.id} movie={show} />
-                    ))}
-                </div>
-            </section>
+            <Suspense fallback={<MediaGrid title="Popular TV Shows" items={[]} isLoading={true} />}>
+                <MediaGrid
+                    title="Popular TV Shows"
+                    items={popularTv}
+                />
+            </Suspense>
 
-            <section className="px-4 py-8">
-                <h2 className="text-2xl font-bold mb-4">Trending TV Shows</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {trendingTv.map((show: Show) => (
-                        <MovieCard key={show.id} movie={show} />
-                    ))}
-                </div>
-            </section>
+            <Suspense fallback={<MediaGrid title="Trending TV Shows" items={[]} isLoading={true} />}>
+                <MediaGrid
+                    title="Trending TV Shows"
+                    items={trendingTv}
+                />
+            </Suspense>
         </main>
     );
 }

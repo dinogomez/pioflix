@@ -1,7 +1,7 @@
-import { ImageWithFallback } from '@/components/image-w-fallback';
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Movie } from '@/types/movie';
 import { Show } from '@/types/show';
+import Image from 'next/image';
 
 interface MovieCardProps {
     movie: Movie | Show;
@@ -13,14 +13,14 @@ export default function MovieCard({ movie }: MovieCardProps) {
     return (
         <div className="relative group cursor-pointer">
             <AspectRatio ratio={2 / 3}>
-                <ImageWithFallback
+
+                <Image
                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={title}
+                    alt={title ? title : "Movie/Show"}
                     fill
-                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     className="rounded-lg transition-transform duration-300 group-hover:scale-105 object-cover"
-                    priority={false}
-                    quality={85}
+                    placeholder="blur"
+                    blurDataURL="/load.png"
                 />
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <h3 className="text-white font-semibold">{title}</h3>
