@@ -1,6 +1,6 @@
 // app/page.tsx
+import { Link } from 'next-view-transitions'
 import Image from 'next/image'
-import Link from 'next/link'
 import { profiles } from './_data/profiles'
 
 
