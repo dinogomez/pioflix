@@ -1,4 +1,5 @@
 export interface Show {
+  adult: boolean;
   id: number;
   name: string;
   original_name: string;
@@ -9,4 +10,5 @@ export interface Show {
   first_air_date: string;
   number_of_seasons?: number;
   number_of_episodes?: number;
+  vote_count: number;
 }
