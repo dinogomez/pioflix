@@ -14,7 +14,6 @@ export default function BrowseLayout({
       <main className="pt-16">
         <div className="max-w-7xl mx-auto px-4">
           {children}
-
         </div>
       </main>
     </>
