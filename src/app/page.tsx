@@ -20,7 +20,7 @@ export default function ProfileSelection() {
             <div className="relative w-32 h-32 overflow-hidden rounded-lg group-hover:ring-4 ring-white transition-all">
               <Image
                 src={profile.image}
-                alt={profile.name}
+                alt={profile.name ? profile.name : "profile avatar"}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform"
               />

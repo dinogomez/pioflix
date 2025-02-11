@@ -1,4 +1,3 @@
-
 import { Navbar } from "./_components/navbar";
 
 export default function BrowseLayout({
@@ -6,8 +5,6 @@ export default function BrowseLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
     <>
       <Navbar />

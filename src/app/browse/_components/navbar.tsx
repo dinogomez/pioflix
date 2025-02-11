@@ -136,7 +136,7 @@ export function Navbar() {
                             <div className="relative w-8 h-8 overflow-hidden rounded">
                                 <Image
                                     src={currentProfile.image}
-                                    alt={currentProfile.name}
+                                    alt={currentProfile.name ? currentProfile.name : "profile avatar"}
                                     fill
                                     className="object-cover"
                                 />
@@ -154,7 +154,7 @@ export function Navbar() {
                                         <div className="relative w-8 h-8 overflow-hidden rounded">
                                             <Image
                                                 src={profile.image}
-                                                alt={profile.name}
+                                                alt={profile.name ? profile.name : "profile avatar"}
                                                 fill
                                                 className="object-cover"
                                             />
