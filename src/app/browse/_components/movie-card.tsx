@@ -34,6 +34,7 @@ export default function MovieCard({ content }: MovieCardProps) {
                             className="rounded-t-lg object-cover"
                             placeholder="blur"
                             blurDataURL="/load.png"
+                            loading="lazy"
                         />
                     </AspectRatio>
                     <div className="details-section absolute w-full opacity-0 group-hover:opacity-100 active:opacity-0 transition-all duration-200 ease-in-out transform 
