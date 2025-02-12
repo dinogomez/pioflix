@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import HeroSection from "../../_components/hero-section";
 import { MediaGrid } from "../../_components/media-grid";
 
-async function TvPage() {
+export default async function TvPage() {
     const popularTvPromise = getPopularTv();
     const trendingTvPromise = getTrendingTv();
 
@@ -35,4 +35,3 @@ async function TvPage() {
     );
 }
 
-export default TvPage;

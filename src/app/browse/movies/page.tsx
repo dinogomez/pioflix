@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import HeroSection from "../../_components/hero-section";
 import { MediaGrid } from "../../_components/media-grid";
 
-async function MoviesPage() {
+export default async function MoviesPage() {
     const popularMoviesPromise = getPopularMovies();
 
     const trendingMoviesPromise = getTrendingMovies();
@@ -36,7 +36,6 @@ async function MoviesPage() {
     );
 }
 
-export default MoviesPage;
 
 
 
