@@ -1,4 +1,6 @@
-export const profiles = [
+import { Profile } from "@/types/profile";
+
+export const profiles: Profile[] = [
   {
     id: 1,
     name: "Stephen",
