@@ -98,7 +98,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ content: initialContent }) =>
                             <div className="absolute bottom-0 left-0 right-0 p-8 flex justify-between items-end">
                                 <div>
                                     <h1 className="text-4xl font-bold mb-4">{title || "Featured Content"}</h1>
-                                    <p className="text-lg max-w-2xl line-clamp-3">{content.overview}</p>
+                                    <p className="text-lg max-w-2xl line-clamp-3 hidden md:block">{content.overview}</p>
                                 </div>
                             </div>
                         </Link>
@@ -127,7 +127,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ content: initialContent }) =>
                                     <h1 className="text-4xl font-bold mb-4">
                                         {('title' in nextContent ? nextContent.title : nextContent.name) || "Featured Content"}
                                     </h1>
-                                    <p className="text-lg max-w-2xl line-clamp-3">{nextContent.overview}</p>
+                                    <p className="text-lg max-w-2xl line-clamp-3 hidden md:block">{nextContent.overview}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -135,7 +135,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ content: initialContent }) =>
                 </AnimatePresence>
             </div>
             <CircleChevronRightIcon
-                className="absolute right-8 bottom-8 !p-0 text-muted-foreground hover:text-foreground scale-150 hover:!bg-transparent z-10"
+                className="absolute right-8 bottom-[3.5rem] md:bottom-8 !p-0 text-muted-foreground hover:text-foreground scale-150 hover:!bg-transparent z-10"
                 onClick={(e) => {
                     e.preventDefault();
                     if (!isAnimating) {
