@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon, CheckIconHandle } from "@/components/icons/check";
+import { CheckIcon, CheckIconHandle } from "@/components/icons/check-icon";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Badge } from "@/components/ui/badge";
 import { Movie } from "@/types/movie";
