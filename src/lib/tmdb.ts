@@ -1,8 +1,11 @@
-import { env } from "./env";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://pioflix.vercel.app/"
+    : "http://localhost:3000";
 
 export async function getPopularMovies() {
   const res = await fetch(
-    `${env.tmdb.baseUrl}/movie/popular?api_key=${env.tmdb.apiKey}&language=en-US&page=1`
+    `${baseUrl}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`
   );
   const data = await res.json();
   return data.results;
