@@ -1,5 +1,6 @@
 import ContentDetail from "@/app/browse/_components/content-detail";
 import { getMovieDetails } from "@/lib/tmdb";
+import { Movie } from "@/types/movie";
 
 type PageProps = {
     params: Promise<{
@@ -9,7 +10,7 @@ type PageProps = {
 
 export default async function MoviePage({ params }: PageProps) {
     const { id } = await params;
-    const movie = await getMovieDetails(id);
+    const movie = await getMovieDetails(id) as Movie;
 
 
     if (!movie) {
