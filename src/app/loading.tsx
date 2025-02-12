@@ -25,9 +25,6 @@ export default function Loading() {
                     />
                 </div>
             )}
-            {profileId && (
-                <div className="absolute bottom-4 text-white">Profile ID: {profileId}</div>
-            )}
         </div>
     );
 }

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { ViewTransitions } from 'next-view-transitions';
 import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Suspense } from "react";
+import Loader from "./_components/loader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -30,7 +32,11 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
         >
-          <NuqsAdapter>{children}</NuqsAdapter>
+          <NuqsAdapter>
+            <Suspense fallback={<Loader />}>
+              {children}
+            </Suspense>
+          </NuqsAdapter>
         </body>
       </html>
     </ViewTransitions>
