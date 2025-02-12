@@ -10,7 +10,7 @@ export default function ContentDetailSkeleton() {
                 <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            <div className="relative z-10 px-4 lg:px-8 -mt-32">
+            <div className="relative z-10 px-4 lg:px-6 -mt-32">
                 <div className="flex flex-col md:flex-row gap-8">
                     {/* Poster Skeleton */}
                     <div className="w-full md:w-1/4">
@@ -66,7 +66,7 @@ export default function ContentDetailSkeleton() {
             </div>
 
             {/* Additional Content Sections */}
-            <div className="mt-16 space-y-12">
+            <div className="mt-16 space-y-12 px-4 lg:px-6">
                 {/* Cast & Crew Section Skeleton */}
                 <section>
                     <Skeleton className="h-8 w-48 mb-6" />
