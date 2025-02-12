@@ -4,13 +4,14 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { page: string } }
+  { params }: { params: Promise<{ page: string }> }
 ) {
   try {
-    const page = params.page || "1";
+    const { page } = await params;
+    const pageNumber = page || "1";
 
     const response = await fetch(
-      `${process.env.TMDB_API_BASE_URL}/trending/movie/day?language=en-US&page=${page}`,
+      `${process.env.TMDB_API_BASE_URL}/trending/movie/day?language=en-US&page=${pageNumber}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.TMDB_API_READ_ACCESS_TOKEN}`,
@@ -40,7 +41,7 @@ export async function GET(
     return NextResponse.json({
       results: moviesWithDetails,
       total_pages: Math.min(data.total_pages, 20),
-      current_page: Number(page),
+      current_page: Number(pageNumber),
     });
   } catch (error) {
     return NextResponse.json(

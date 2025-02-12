@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { type: string } }
+  { params }: { params: Promise<{ type: string }> }
 ) {
   try {
-    const type = params.type;
+    const { type } = await params;
     let content;
 
     if (type === "movie") {
