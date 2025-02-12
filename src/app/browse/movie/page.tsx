@@ -1,7 +1,7 @@
 import { getPopularMovies, getTrendingMovies } from '@/lib/tmdb';
 import { Movie } from '@/types/movie';
-import HeroSection from "../../_components/hero-section";
-import { MediaGrid } from "../../_components/media-grid";
+import HeroSection from "../_components/hero-section";
+import { MediaGrid } from "../_components/media-grid";
 
 export default async function MoviesPage() {
     const popularMoviesPromise = getPopularMovies();
@@ -25,11 +25,7 @@ export default async function MoviesPage() {
     return (
         <main className="min-h-screen bg-background pt-5">
             {randomHeroMovie && (
-                <HeroSection
-                    imageSrc={`https://image.tmdb.org/t/p/original${randomHeroMovie.backdrop_path}`}
-                    title={randomHeroMovie.title}
-                    overview={randomHeroMovie.overview}
-                />
+                <HeroSection content={randomHeroMovie} />
             )}
 
             {validTrendingMovies.length > 0 && (
@@ -48,8 +44,3 @@ export default async function MoviesPage() {
         </main>
     );
 }
-
-
-
-
-

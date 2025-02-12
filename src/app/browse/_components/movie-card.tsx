@@ -3,7 +3,7 @@ import { Movie } from '@/types/movie';
 import { Show } from '@/types/show';
 import { Calendar, Clock, Star, ThumbsUp, Tv } from 'lucide-react';
 import { Link } from 'next-view-transitions';
-import ImageFallback from "./ImageFallback";
+import ImageFallback from "../../_components/ImageFallback";
 
 interface MovieCardProps {
     content: Movie | Show;

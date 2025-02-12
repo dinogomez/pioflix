@@ -1,7 +1,7 @@
 import { getPopularTv, getTrendingTv } from '@/lib/tmdb';
 import { Show } from '@/types/show';
-import HeroSection from "../../_components/hero-section";
-import { MediaGrid } from "../../_components/media-grid";
+import HeroSection from "../_components/hero-section";
+import { MediaGrid } from "../_components/media-grid";
 
 export default async function TvPage() {
     const popularTvPromise = getPopularTv();
@@ -24,11 +24,7 @@ export default async function TvPage() {
     return (
         <main className="min-h-screen bg-background pt-5">
             {randomHeroShow && (
-                <HeroSection
-                    imageSrc={`https://image.tmdb.org/t/p/original${randomHeroShow.backdrop_path}`}
-                    title={randomHeroShow.name}
-                    overview={randomHeroShow.overview}
-                />
+                <HeroSection content={randomHeroShow} />
             )}
 
             {validPopularTv.length > 0 && (

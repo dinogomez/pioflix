@@ -8,7 +8,7 @@ import { Show } from "@/types/show";
 import { motion } from "framer-motion";
 import { Calendar, Clock, Play, Plus, Star, ThumbsUp, Tv } from "lucide-react";
 import { useRef, useState } from "react";
-import ImageFallback from "./ImageFallback";
+import ImageFallback from "../../_components/ImageFallback";
 
 interface ContentDetailProps {
     content: Movie | Show;
@@ -63,11 +63,11 @@ export default function ContentDetail({ content }: ContentDetailProps) {
 
                     {/* Info */}
                     <div className="w-full md:w-3/4">
-                        <h1 className="text-4xl font-bold mb-4">{title}</h1>
+                        <h1 className="text-3xl sm:text-4xl font-bold mb-4">{title}</h1>
 
                         {/* Stats and Genres in one line */}
-                        <div className="flex justify-between items-center mb-6">
-                            <div className="flex items-center gap-6 text-muted-foreground">
+                        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 mb-6">
+                            <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-muted-foreground">
                                 <span className="flex items-center gap-2">
                                     <Calendar className="w-4 h-4" />
                                     {year}
@@ -95,7 +95,7 @@ export default function ContentDetail({ content }: ContentDetailProps) {
                             </div>
                             <div className="flex flex-wrap gap-2">
                                 {content.genres?.map((genre) => (
-                                    <Badge key={genre.id} variant="secondary">
+                                    <Badge key={genre.id} variant="secondary" className="rounded-none bg-transparent border border-muted-foreground hover:border-transparent hover:bg-muted-foreground/10">
                                         {genre.name}
                                     </Badge>
                                 ))}
@@ -105,7 +105,7 @@ export default function ContentDetail({ content }: ContentDetailProps) {
                         <p className="text-lg mb-8">{content.overview}</p>
 
                         {/* Credits and Buttons */}
-                        <div className="flex justify-between">
+                        <div className="flex flex-col lg:flex-row justify-between gap-8">
                             <div className="space-y-4">
                                 {isMovie && director && (
                                     <div>
@@ -143,12 +143,12 @@ export default function ContentDetail({ content }: ContentDetailProps) {
                             </div>
 
                             {/* Action Buttons */}
-                            <div className="space-y-4">
+                            <div className="space-y-4 w-full lg:w-auto flex flex-col items-center lg:items-end">
                                 <motion.a
                                     href="https://www.youtube.com/watch?v=xvFZjo5PgG0"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-64 bg-primary text-primary-foreground px-6 py-3 flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
+                                    className="w-full sm:w-64 bg-primary text-primary-foreground px-6 py-3 flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                 >
@@ -162,7 +162,7 @@ export default function ContentDetail({ content }: ContentDetailProps) {
                                             checkIconRef.current?.startAnimation();
                                         }
                                     }}
-                                    className="w-64 h-[48px] border border-input bg-background hover:bg-accent hover:text-accent-foreground px-6 py-3 flex items-center justify-center gap-2"
+                                    className="w-full sm:w-64 h-[48px] border border-input bg-background hover:bg-accent hover:text-accent-foreground px-6 py-3 flex items-center justify-center gap-2"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                 >

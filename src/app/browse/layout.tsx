@@ -1,4 +1,4 @@
-import { Navbar } from "../_components/navbar";
+import { Navbar } from "./_components/navbar";
 
 export default function BrowseLayout({
   children,
@@ -8,11 +8,11 @@ export default function BrowseLayout({
   return (
     <>
       <Navbar />
-      <main className="pt-14">
+      <div className="h-screen scrollbar-gutter-stable pt-14">
         <div className="max-w-7xl mx-auto px-4">
           {children}
         </div>
-      </main>
+      </div>
     </>
   );
 }

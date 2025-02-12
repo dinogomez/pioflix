@@ -10,16 +10,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { useDebounce } from "@/hooks/use-debounce";
 import { profiles } from "@/lib/profiles";
+import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bell, ChevronDown, Search, X } from "lucide-react";
 import { Link } from 'next-view-transitions';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useEffect, useRef, useState } from "react";
-import ImageFallback from "./ImageFallback";
+import ImageFallback from "../../_components/ImageFallback";
 
 export function Navbar() {
-
     const [profileId, setProfileId] = useQueryState(
         "profile",
         parseAsInteger.withDefault(1)
@@ -29,6 +29,7 @@ export function Navbar() {
     const router = useRouter()
     const searchRef = useRef<HTMLDivElement>(null);
     const debouncedSearch = useDebounce(searchQuery, 500)
+    const pathname = usePathname();
 
     const currentProfile = profiles.find((p) => p.id === profileId) || profiles[0];
     const otherProfiles = profiles.filter((p) => p.id !== currentProfile.id);
@@ -58,9 +59,9 @@ export function Navbar() {
     return (
         <nav className="fixed top-0 w-full bg-background z-50 py-2">
             <div className="flex items-center justify-between px-4 py-2 max-w-7xl mx-auto">
-                <div className="flex items-center gap-8">
+                <div className="flex items-center gap-4 sm:gap-8">
                     <Link href="/browse" className="flex items-center">
-                        <div className="relative h-7 w-[92px]">
+                        <div className="relative h-6 w-[80px] sm:h-8 sm:w-[105px]">
                             <ImageFallback
                                 src="/pioflix.png"
                                 alt="Pioflix"
@@ -72,39 +73,97 @@ export function Navbar() {
                     </Link>
                     <div className="hidden md:flex items-center gap-4">
                         <Link
-                            href="/browse"
-                            className="text-sm text-foreground hover:text-foreground/80 transition"
+                            href={`/browse${profileId !== 1 ? `?profile=${profileId}` : ''}`}
+                            className={cn(
+                                "text-md transition",
+                                pathname === "/browse"
+                                    ? "text-white"
+                                    : "text-neutral-400 hover:text-neutral-500"
+                            )}
                         >
                             Home
                         </Link>
                         <Link
-                            href="/browse/tv"
-                            className="text-sm text-foreground hover:text-foreground/80 transition"
+                            href={`/browse/tv${profileId !== 1 ? `?profile=${profileId}` : ''}`}
+                            className={cn(
+                                "text-md transition",
+                                pathname === "/browse/tv"
+                                    ? "text-white"
+                                    : "text-neutral-400 hover:text-neutral-500"
+                            )}
                         >
                             TV Shows
                         </Link>
                         <Link
-                            href="/browse/movies"
-                            className="text-sm text-foreground hover:text-foreground/80 transition"
+                            href={`/browse/movie${profileId !== 1 ? `?profile=${profileId}` : ''}`}
+                            className={cn(
+                                "text-md transition",
+                                pathname === "/browse/movie"
+                                    ? "text-white"
+                                    : "text-neutral-400 hover:text-neutral-500"
+                            )}
                         >
                             Movies
                         </Link>
                     </div>
+                    <div className="md:hidden">
+                        <DropdownMenu modal={false}>
+                            <DropdownMenuTrigger className="flex items-center gap-1 focus:outline-none">
+                                <span className="text-neutral-400 text-xs sm:text-base">Browse</span>
+                                <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                                <DropdownMenuItem asChild>
+                                    <Link
+                                        href={`/browse${profileId !== 1 ? `?profile=${profileId}` : ''}`}
+                                        className={cn(
+                                            "w-full",
+                                            pathname === "/browse" && "text-white"
+                                        )}
+                                    >
+                                        Home
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                    <Link
+                                        href={`/browse/tv${profileId !== 1 ? `?profile=${profileId}` : ''}`}
+                                        className={cn(
+                                            "w-full",
+                                            pathname === "/browse/tv" && "text-white"
+                                        )}
+                                    >
+                                        TV Shows
+                                    </Link>
+                                </DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                    <Link
+                                        href={`/browse/movie${profileId !== 1 ? `?profile=${profileId}` : ''}`}
+                                        className={cn(
+                                            "w-full",
+                                            pathname === "/browse/movie" && "text-white"
+                                        )}
+                                    >
+                                        Movies
+                                    </Link>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </div>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 sm:gap-4">
                     <div className="relative" ref={searchRef}>
                         <AnimatePresence>
                             {isSearchOpen && (
                                 <motion.div
                                     initial={{ width: 0, opacity: 0 }}
-                                    animate={{ width: "300px", opacity: 1 }}
+                                    animate={{ width: "285px", opacity: 1 }}
                                     exit={{ width: 0, opacity: 0 }}
                                     transition={{ duration: 0.3 }}
                                     className="absolute right-0 top-1/2 -translate-y-1/2"
                                 >
                                     <Input
-                                        className="w-full bg-neutral-900/90 border-neutral-700 text-white placeholder:text-neutral-400 focus-visible:ring-neutral-100"
+                                        className="w-full bg-neutral-900  sm:bg-neutral-900/90 border-neutral-700 text-white placeholder:text-neutral-400 focus-visible:ring-neutral-100"
                                         placeholder="Titles, Movies, TV Shows"
                                         value={searchQuery || ''}
                                         autoFocus
@@ -118,16 +177,16 @@ export function Navbar() {
                             className="p-2 hover:bg-white/10 rounded-full transition"
                         >
                             {isSearchOpen ? (
-                                <X className="h-5 w-5" />
+                                <X className="h-6 w-6" />
                             ) : (
-                                <Search className="h-5 w-5" />
+                                <Search className="h-6 w-6" />
                             )}
                         </button>
                     </div>
 
-                    <DropdownMenu>
+                    <DropdownMenu modal={false}>
                         <DropdownMenuTrigger className="relative p-2 hover:bg-white/10 rounded-full transition focus:outline-none ">
-                            <Bell className="h-5 w-5" />
+                            <Bell className="h-6 w-6" />
                             <span className="absolute top-0 right-0 h-4 w-4 bg-red-600 rounded-full text-[10px] flex items-center justify-center">
                                 1
                             </span>
@@ -144,9 +203,9 @@ export function Navbar() {
                         </DropdownMenuContent>
                     </DropdownMenu>
 
-                    <DropdownMenu>
-                        <DropdownMenuTrigger className="flex items-center gap-2 focus:outline-none pl-1 ">
-                            <div className="relative w-8 h-8 overflow-hidden rounded">
+                    <DropdownMenu modal={false}>
+                        <DropdownMenuTrigger className="flex items-center gap-2 focus:outline-none pl-1">
+                            <div className="relative w-7 h-7 sm:w-8 sm:h-8 overflow-hidden rounded">
                                 <ImageFallback
                                     src={currentProfile.image}
                                     alt={currentProfile.name ? currentProfile.name : "profile avatar"}
@@ -154,13 +213,16 @@ export function Navbar() {
                                     className="object-cover"
                                 />
                             </div>
-                            <ChevronDown className="w-4 h-4" />
+                            <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5" />
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end" className="w-48">
+                        <DropdownMenuContent align="end" className="w-48" sideOffset={8}>
                             {otherProfiles.map((profile) => (
                                 <DropdownMenuItem
                                     key={profile.id}
-                                    onClick={() => setProfileId(profile.id)}
+                                    onClick={async () => {
+                                        await setProfileId(profile.id);
+                                        router.push(`/browse?profile=${profile.id}`);
+                                    }}
                                     className="cursor-pointer"
                                 >
                                     <div className="flex items-center gap-3">

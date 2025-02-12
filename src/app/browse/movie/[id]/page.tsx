@@ -1,4 +1,4 @@
-import ContentDetail from "@/app/_components/content-detail";
+import ContentDetail from "@/app/browse/_components/content-detail";
 import { getMovieDetails } from "@/lib/tmdb";
 
 type PageProps = {
