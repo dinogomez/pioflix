@@ -4,7 +4,7 @@
 
 # PIOFLIX - IMDB CODING CHALLENGE
 
-A modern, responsive movie and TV show discovery platform built with Next.js 14, TypeScript, and the TMDB API. This project was created as part of a coding challenge to demonstrate full-stack development capabilities.
+A modern, responsive movie and TV show discovery platform built with Next.js 15, TypeScript, and the TMDB API. This project was created as part of a coding challenge to demonstrate full-stack development capabilities.
 
 ## Features
 

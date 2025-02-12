@@ -9,7 +9,7 @@ export default async function BrowsePage() {
     const isFromHomePage = referer?.endsWith("/");
 
     if (isFromHomePage) {
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        await new Promise((resolve) => setTimeout(resolve, 1800));
     }
 
     const popularMoviesPromise = getPopularMovies();
