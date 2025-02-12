@@ -1,8 +1,17 @@
 import { getPopularMovies, getPopularTv } from "@/lib/tmdb";
+import { headers } from "next/headers";
 import HeroSection from "./_components/hero-section";
 import { MediaGrid } from "./_components/media-grid";
 
 export default async function BrowsePage() {
+    const headersList = await headers();
+    const referer = headersList.get("referer");
+    const isFromHomePage = referer?.endsWith("/");
+
+    if (isFromHomePage) {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+    }
+
     const popularMoviesPromise = getPopularMovies();
     const popularTvPromise = getPopularTv();
 
@@ -12,7 +21,9 @@ export default async function BrowsePage() {
     ]);
 
     const allContent = [...(popularMovies || []), ...(popularTv || [])].filter(
-        (content) => content?.backdrop_path && ('title' in content ? content.title : content.name)
+        (content) =>
+            content?.backdrop_path &&
+            ("title" in content ? content.title : content.name)
     );
 
     const randomHeroContent =
@@ -22,9 +33,7 @@ export default async function BrowsePage() {
 
     return (
         <main className="min-h-screen bg-background pt-5">
-            {randomHeroContent && (
-                <HeroSection content={randomHeroContent} />
-            )}
+            {randomHeroContent && <HeroSection content={randomHeroContent} />}
 
             {popularMovies?.length > 0 && (
                 <MediaGrid title="Popular Movies" items={popularMovies} limit={8} />
@@ -36,4 +45,3 @@ export default async function BrowsePage() {
         </main>
     );
 }
-

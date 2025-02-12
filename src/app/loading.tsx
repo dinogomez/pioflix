@@ -18,8 +18,8 @@ export default function Loading() {
                     <Image
                         src={selectedProfile.image}
                         alt={`${selectedProfile.name || "User"}'s Avatar`}
-                        width={120}
-                        height={120}
+                        width={80}
+                        height={80}
                         className="rounded"
                         priority
                     />
