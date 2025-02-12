@@ -12,7 +12,7 @@ export default async function BrowsePage() {
     ]);
 
     const allContent = [...(popularMovies || []), ...(popularTv || [])].filter(
-        (content) => content?.backdrop_path && (content?.title || content?.name)
+        (content) => content?.backdrop_path && ('title' in content ? content.title : content.name)
     );
 
     const randomHeroContent =
