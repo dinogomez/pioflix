@@ -96,3 +96,75 @@ export async function getTvShowDetails(id: string): Promise<Show | null> {
     "Error fetching TV show details:"
   );
 }
+
+export async function getPopularMoviesByPage(page: number = 1): Promise<{
+  movies: Movie[];
+  totalPages: number;
+  currentPage: number;
+}> {
+  const data = await fetchFromApi<{
+    results: Movie[];
+    total_pages: number;
+    current_page: number;
+  }>(`/api/movie/popular/${page}`, 1800, "Error fetching popular movies:");
+
+  return {
+    movies: data?.results || [],
+    totalPages: data?.total_pages || 1,
+    currentPage: data?.current_page || 1,
+  };
+}
+
+export async function getTrendingMoviesByPage(page: number = 1): Promise<{
+  movies: Movie[];
+  totalPages: number;
+  currentPage: number;
+}> {
+  const data = await fetchFromApi<{
+    results: Movie[];
+    total_pages: number;
+    current_page: number;
+  }>(`/api/movie/trending/${page}`, 1800, "Error fetching trending movies:");
+
+  return {
+    movies: data?.results || [],
+    totalPages: data?.total_pages || 1,
+    currentPage: data?.current_page || 1,
+  };
+}
+
+export async function getPopularTvByPage(page: number = 1): Promise<{
+  shows: Show[];
+  totalPages: number;
+  currentPage: number;
+}> {
+  const data = await fetchFromApi<{
+    results: Show[];
+    total_pages: number;
+    current_page: number;
+  }>(`/api/tv/popular/${page}`, 1800, "Error fetching popular TV shows:");
+
+  return {
+    shows: data?.results || [],
+    totalPages: data?.total_pages || 1,
+    currentPage: data?.current_page || 1,
+  };
+}
+
+export async function getTrendingTvByPage(page: number = 1): Promise<{
+  shows: Show[];
+  totalPages: number;
+  currentPage: number;
+}> {
+  const data = await fetchFromApi<{
+    results: Show[];
+    total_pages: number;
+    current_page: number;
+  }>(`/api/tv/trending/${page}`, 1800, "Error fetching trending TV shows:");
+
+  return {
+    shows: data?.results || [],
+    totalPages: data?.total_pages || 1,
+    currentPage: data?.current_page || 1,
+  };
+}
