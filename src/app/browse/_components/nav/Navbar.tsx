@@ -41,7 +41,7 @@ export function Navbar() {
     }, [debouncedSearch, router])
 
     return (
-        <nav className="fixed top-0 w-full bg-background z-50 py-2">
+        <nav className="fixed top-0 w-full bg-background z-50 py-4">
             <div className="flex items-center justify-between px-4 py-2 max-w-7xl mx-auto">
                 <div className="flex items-center gap-4 sm:gap-8">
                     <Link href="/browse" className="flex items-center">
