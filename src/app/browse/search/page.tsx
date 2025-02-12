@@ -22,24 +22,28 @@ export default async function SearchPage({ searchParams }: PageProps) {
         );
     }
 
-    const { movies, tvShows } = await getSearchResults(q);
+    const { movies, tvShows }: { movies: Movie[], tvShows: Show[] } = await getSearchResults(q);
 
-    movies.sort((a: Movie, b: Movie) => b.vote_count - a.vote_count);
-    tvShows.sort((a: Show, b: Show) => b.vote_count - a.vote_count);
+    const validMovies = (movies || [])
+        .filter((movie: Movie) => movie?.poster_path && movie?.title)
+        .sort((a: Movie, b: Movie) => b.vote_count - a.vote_count);
 
+    const validTvShows = (tvShows || [])
+        .filter((show: Show) => show?.poster_path && show?.name)
+        .sort((a: Show, b: Show) => b.vote_count - a.vote_count);
 
     return (
         <main className="min-h-screen bg-background pt-5">
             <div className="max-w-7xl mx-auto px-4">
-                {movies.length > 0 && (
-                    <MediaGrid title="Movies" items={movies as Movie[]} />
+                {validMovies.length > 0 && (
+                    <MediaGrid title="Movies" items={validMovies as Movie[]} />
                 )}
 
-                {tvShows.length > 0 && (
-                    <MediaGrid title="TV Shows" items={tvShows as Show[]} />
+                {validTvShows.length > 0 && (
+                    <MediaGrid title="TV Shows" items={validTvShows as Show[]} />
                 )}
 
-                {movies.length === 0 && tvShows.length === 0 && (
+                {validMovies.length === 0 && validTvShows.length === 0 && (
                     <div className="pt-20">
                         <div className="text-center text-muted-foreground text-xl">
                             No results found for &ldquo;{String(q)}&rdquo;

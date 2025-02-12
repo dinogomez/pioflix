@@ -11,21 +11,32 @@ export default async function BrowsePage() {
         popularTvPromise,
     ]);
 
-    const allContent = [...popularMovies, ...popularTv];
+    const allContent = [...(popularMovies || []), ...(popularTv || [])].filter(
+        (content) => content?.backdrop_path && (content?.title || content?.name)
+    );
+
     const randomHeroContent =
-        allContent[Math.floor(Math.random() * allContent.length)];
+        allContent.length > 0
+            ? allContent[Math.floor(Math.random() * allContent.length)]
+            : null;
 
     return (
         <main className="min-h-screen bg-background pt-5">
-            <HeroSection
-                imageSrc={`https://image.tmdb.org/t/p/original${randomHeroContent.backdrop_path}`}
-                title={randomHeroContent.title || randomHeroContent.name}
-                overview={randomHeroContent.overview}
-            />
+            {randomHeroContent && (
+                <HeroSection
+                    imageSrc={`https://image.tmdb.org/t/p/original${randomHeroContent.backdrop_path}`}
+                    title={randomHeroContent.title || randomHeroContent.name}
+                    overview={randomHeroContent.overview}
+                />
+            )}
 
-            <MediaGrid title="Popular Movies" items={popularMovies} limit={8} />
+            {popularMovies?.length > 0 && (
+                <MediaGrid title="Popular Movies" items={popularMovies} limit={8} />
+            )}
 
-            <MediaGrid title="Popular TV Shows" items={popularTv} limit={8} />
+            {popularTv?.length > 0 && (
+                <MediaGrid title="Popular TV Shows" items={popularTv} limit={8} />
+            )}
         </main>
     );
 }
