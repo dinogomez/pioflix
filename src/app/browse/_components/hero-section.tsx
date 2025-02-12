@@ -1,6 +1,6 @@
 "use client"
 
-import { CircleChevronRightIcon } from "@/components/icons/chevron-right";
+import { CircleChevronRightIcon } from "@/components/icons/chevron-right-icon";
 import { Movie } from "@/types/movie";
 import { Show } from "@/types/show";
 import { Link } from 'next-view-transitions';
