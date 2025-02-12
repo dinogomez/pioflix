@@ -49,12 +49,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ content: initialContent }) =>
         try {
             let newContent;
             if (prefetchedContent) {
+                if (prefetchedContent.id === content.id) {
+                    setPrefetchedContent(null);
+                    return;
+                }
                 newContent = prefetchedContent;
                 setPrefetchedContent(null);
             } else {
                 const type = isMovie ? 'movie' : 'tv';
                 const response = await fetch(`/api/random/${type}`);
                 newContent = await response.json();
+                if (newContent.id === content.id) {
+                    return;
+                }
             }
 
             if (newContent) {
@@ -93,6 +100,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ content: initialContent }) =>
                                 placeholder="blur"
                                 blurDataURL="/load.png"
                                 onError={() => setHasError(true)}
+                                priority
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
                             <div className="absolute bottom-0 left-0 right-0 p-8 flex justify-between items-end">
@@ -120,6 +128,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ content: initialContent }) =>
                                 className="w-full h-full object-cover rounded-md"
                                 placeholder="blur"
                                 blurDataURL="/load.png"
+                                priority
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
                             <div className="absolute bottom-0 left-0 right-0 p-8 flex justify-between items-end">
@@ -135,7 +144,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ content: initialContent }) =>
                 </AnimatePresence>
             </div>
             <CircleChevronRightIcon
-                className="absolute right-8 bottom-[3.5rem] md:bottom-8 !p-0 text-muted-foreground hover:text-foreground scale-150 hover:!bg-transparent z-10"
+                className="absolute right-8 bottom-[9rem] md:bottom-8 !p-0 text-muted-foreground hover:text-foreground scale-150 hover:!bg-transparent z-10"
                 onClick={(e) => {
                     e.preventDefault();
                     if (!isAnimating) {
