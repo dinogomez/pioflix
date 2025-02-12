@@ -1,5 +1,4 @@
 import { getPopularMovies, getPopularTv } from "@/lib/tmdb";
-import { Suspense } from "react";
 import HeroSection from "../_components/hero-section";
 import { MediaGrid } from "../_components/media-grid";
 
@@ -23,25 +22,10 @@ export default async function BrowsePage() {
                 title={randomHeroContent.title || randomHeroContent.name}
                 overview={randomHeroContent.overview}
             />
-            <Suspense
-                fallback={
-                    <MediaGrid title="Popular Movies" items={[]} limit={8} isLoading={true} />
-                }
-            >
-                <MediaGrid title="Popular Movies" items={popularMovies} limit={8} />
-            </Suspense>
-            <Suspense
-                fallback={
-                    <MediaGrid
-                        title="Popular TV Shows"
-                        items={[]}
-                        limit={8}
-                        isLoading={true}
-                    />
-                }
-            >
-                <MediaGrid title="Popular TV Shows" items={popularTv} limit={8} />
-            </Suspense>
+
+            <MediaGrid title="Popular Movies" items={popularMovies} limit={8} />
+
+            <MediaGrid title="Popular TV Shows" items={popularTv} limit={8} />
         </main>
     );
 }
