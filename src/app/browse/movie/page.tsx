@@ -10,7 +10,7 @@ export default async function MoviesPage() {
     const [popularMovies, trendingMovies]: [Movie[], Movie[]] = await Promise.all([
         popularMoviesPromise,
         trendingMoviesPromise
-    ]);
+    ]) as [Movie[], Movie[]];
 
     const validPopularMovies = (popularMovies || [])
         .filter((movie: Movie) => movie?.backdrop_path && movie?.title);
