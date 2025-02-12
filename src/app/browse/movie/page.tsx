@@ -1,7 +1,7 @@
 import { getPopularMovies, getTrendingMovies } from '@/lib/tmdb';
 import { Movie } from '@/types/movie';
-import HeroSection from "../_components/hero-section";
-import { MediaGrid } from "../_components/media-grid";
+import HeroSection from '../_components/hero-section';
+import { MediaGrid } from '../_components/media-grid';
 
 export default async function MoviesPage() {
     const popularMoviesPromise = getPopularMovies();
@@ -32,6 +32,8 @@ export default async function MoviesPage() {
                 <MediaGrid
                     title="Trending Now"
                     items={validTrendingMovies}
+                    limit={8}
+                    exploreLink="/browse/movie/trending"
                 />
             )}
 
@@ -39,6 +41,8 @@ export default async function MoviesPage() {
                 <MediaGrid
                     title="Popular Movies"
                     items={validPopularMovies}
+                    limit={8}
+                    exploreLink="/browse/movie/popular"
                 />
             )}
         </main>
