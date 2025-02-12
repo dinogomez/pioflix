@@ -58,7 +58,7 @@ export function Navbar() {
                     <NavLinks pathname={pathname} profileId={profileId} />
                 </div>
 
-                <div className="flex items-center gap-2 sm:gap-4">
+                <div className="flex items-center gap-4">
                     <NavSearch
                         isSearchOpen={isSearchOpen}
                         setIsSearchOpen={setIsSearchOpen}
