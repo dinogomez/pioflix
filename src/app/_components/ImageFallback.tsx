@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 
 interface ImageFallbackProps {
     src: string;
-    fallbackSrc: string;
+    fallbackSrc?: string;
     [key: string]: string | number | undefined | boolean;
 }
 
 const ImageFallback: React.FC<ImageFallbackProps> = (props) => {
-    const { src, fallbackSrc, ...rest } = props;
+    const { src, fallbackSrc = '/image-fail.png', ...rest } = props;
     const [imgSrc, setImgSrc] = useState(false);
     const [oldSrc, setOldSrc] = useState(src);
 

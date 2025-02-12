@@ -1,7 +1,7 @@
 // app/page.tsx
 import { profiles } from "@/lib/profiles"
 import { Link } from 'next-view-transitions'
-import Image from 'next/image'
+import ImageFallback from "./_components/ImageFallback"
 
 
 
@@ -18,7 +18,7 @@ export default function ProfileSelection() {
             className="group flex flex-col items-center gap-3"
           >
             <div className="relative w-32 h-32 overflow-hidden rounded-lg group-hover:ring-4 ring-white transition-all">
-              <Image
+              <ImageFallback
                 src={profile.image}
                 alt={profile.name ? profile.name : "profile avatar"}
                 fill

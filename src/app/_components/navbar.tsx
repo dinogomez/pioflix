@@ -13,10 +13,10 @@ import { profiles } from "@/lib/profiles";
 import { AnimatePresence, motion } from "framer-motion";
 import { Bell, ChevronDown, Search, X } from "lucide-react";
 import { Link } from 'next-view-transitions';
-import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { parseAsInteger, useQueryState } from "nuqs";
 import { useEffect, useRef, useState } from "react";
+import ImageFallback from "./ImageFallback";
 
 export function Navbar() {
 
@@ -61,7 +61,7 @@ export function Navbar() {
                 <div className="flex items-center gap-8">
                     <Link href="/browse" className="flex items-center">
                         <div className="relative h-7 w-[92px]">
-                            <Image
+                            <ImageFallback
                                 src="/pioflix.png"
                                 alt="Pioflix"
                                 fill
@@ -147,7 +147,7 @@ export function Navbar() {
                     <DropdownMenu>
                         <DropdownMenuTrigger className="flex items-center gap-2 focus:outline-none pl-1 ">
                             <div className="relative w-8 h-8 overflow-hidden rounded">
-                                <Image
+                                <ImageFallback
                                     src={currentProfile.image}
                                     alt={currentProfile.name ? currentProfile.name : "profile avatar"}
                                     fill
@@ -165,7 +165,7 @@ export function Navbar() {
                                 >
                                     <div className="flex items-center gap-3">
                                         <div className="relative w-8 h-8 overflow-hidden rounded">
-                                            <Image
+                                            <ImageFallback
                                                 src={profile.image}
                                                 alt={profile.name ? profile.name : "profile avatar"}
                                                 fill

@@ -12,7 +12,6 @@ export default function MovieCard({ movie }: MovieCardProps) {
     const title = 'title' in movie ? movie.title : movie.name;
     const year = 'release_date' in movie ? new Date(movie.release_date).getFullYear() : new Date(movie.first_air_date).getFullYear();
 
-    // Generate a random number to determine badge display
     const badgeType = Math.random() < 0.6 ? "4K" : Math.random() < 0.8 ? "HD" : "SD";
 
     return (
@@ -29,7 +28,6 @@ export default function MovieCard({ movie }: MovieCardProps) {
                         className="rounded-t-lg object-cover"
                         placeholder="blur"
                         blurDataURL="/load.png"
-                        fallbackSrc={"/image-fail.png"}
                     />
                 </AspectRatio>
                 <div className="absolute w-full invisible group-hover:visible transform 
