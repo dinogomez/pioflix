@@ -1,5 +1,4 @@
 import { getPopularMovies, getTrendingMovies } from '@/lib/tmdb';
-import { Suspense } from "react";
 import HeroSection from "../../_components/hero-section";
 import { MediaGrid } from "../../_components/media-grid";
 
@@ -22,12 +21,10 @@ export default async function MoviesPage() {
                 title={randomHeroMovie.title}
                 overview={randomHeroMovie.overview}
             />
-            <Suspense fallback={<MediaGrid title="Trending Now" items={[]} isLoading={true} />}>
-                <MediaGrid
-                    title="Trending Now"
-                    items={trendingMovies}
-                />
-            </Suspense>
+            <MediaGrid
+                title="Trending Now"
+                items={trendingMovies}
+            />
             <MediaGrid
                 title="Popular Movies"
                 items={popularMovies}
