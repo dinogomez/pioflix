@@ -11,7 +11,6 @@ export default async function MoviePage({ params }: PageProps) {
     const { id } = await params;
     const movie = await getMovieDetails(id);
 
-    console.log(movie);
 
     if (!movie) {
         return <div>Movie not found</div>;
