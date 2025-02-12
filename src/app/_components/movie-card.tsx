@@ -23,6 +23,9 @@ export default function MovieCard({ movie }: MovieCardProps) {
                         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                         alt={title ? title : "Movie/Show"}
                         fill
+                        width={0}
+                        height={0}
+                        sizes="100vw"
                         className="rounded-t-lg object-cover"
                         placeholder="blur"
                         blurDataURL="/load.png"
