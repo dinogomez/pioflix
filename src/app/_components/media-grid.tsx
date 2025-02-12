@@ -26,7 +26,7 @@ export function MediaGrid({ title, items, limit, isLoading = false }: MediaGridP
                         ))
                     ) : (
                         displayItems.map((item) => (
-                            <MovieCard key={item.id} movie={item} />
+                            <MovieCard key={item.id} content={item} />
                         ))
                     )}
                 </div>

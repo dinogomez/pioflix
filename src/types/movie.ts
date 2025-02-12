@@ -1,3 +1,5 @@
+import { Credits, Genre } from "./misc";
+
 export interface Movie {
   adult: boolean;
   id: number;
@@ -8,4 +10,7 @@ export interface Movie {
   vote_average: number;
   release_date: string;
   vote_count: number;
+  genres: Genre[];
+  credits?: Credits;
+  runtime?: number;
 }

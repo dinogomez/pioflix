@@ -32,6 +32,7 @@ export async function getTrendingMovies() {
     }
 
     const data = await res.json();
+
     return data;
   } catch (error) {
     console.error("Error fetching trending movies:", error);
@@ -90,5 +91,33 @@ export async function getSearchResults(query: string) {
   } catch (error) {
     console.error("Error fetching search results:", error);
     return [];
+  }
+}
+
+export async function getMovieDetails(id: string) {
+  try {
+    const res = await fetch(`${baseUrl}/api/movies/${id}`, {
+      next: { revalidate: 3600 },
+    });
+
+    if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching movie details:", error);
+    return null;
+  }
+}
+
+export async function getTvShowDetails(id: string) {
+  try {
+    const res = await fetch(`${baseUrl}/api/tv/${id}`, {
+      next: { revalidate: 3600 },
+    });
+
+    if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
+    return await res.json();
+  } catch (error) {
+    console.error("Error fetching TV show details:", error);
+    return null;
   }
 }
