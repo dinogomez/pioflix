@@ -1,3 +1,5 @@
+import { Creator, Credits, Genre } from "./misc";
+
 export interface Show {
   adult: boolean;
   id: number;
@@ -11,4 +13,7 @@ export interface Show {
   number_of_seasons?: number;
   number_of_episodes?: number;
   vote_count: number;
+  genres: Genre[];
+  credits?: Credits;
+  created_by?: Creator[];
 }

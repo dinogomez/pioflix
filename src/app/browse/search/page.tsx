@@ -1,9 +1,9 @@
+import { loadSearchParams } from "@/app/_components/_params/SearchParams";
 import { MediaGrid } from "@/app/_components/media-grid";
 import { getSearchResults } from "@/lib/tmdb";
 import { Movie } from "@/types/movie";
 import { Show } from "@/types/show";
 import { SearchParams } from "nuqs/server";
-import { loadSearchParams } from "./_params/SearchParams";
 
 type PageProps = {
     searchParams: Promise<SearchParams>;

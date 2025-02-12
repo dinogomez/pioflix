@@ -1,3 +1,4 @@
+import { Movie } from "@/types/movie";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -13,7 +14,24 @@ export async function GET() {
     );
 
     const data = await response.json();
-    return NextResponse.json(data.results);
+
+    const moviesWithDetails = await Promise.all(
+      data.results.map(async (movie: Movie) => {
+        const detailsResponse = await fetch(
+          `${process.env.TMDB_API_BASE_URL}/movie/${movie.id}?language=en-US`,
+          {
+            headers: {
+              Authorization: `Bearer ${process.env.TMDB_API_READ_ACCESS_TOKEN}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const details = await detailsResponse.json();
+        return { ...movie, ...details };
+      })
+    );
+
+    return NextResponse.json(moviesWithDetails);
   } catch (error) {
     return NextResponse.json(
       { error: `Failed to fetch trending movies: ${error}` },
