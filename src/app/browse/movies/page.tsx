@@ -5,6 +5,7 @@ import { MediaGrid } from "../../_components/media-grid";
 
 async function MoviesPage() {
     const popularMoviesPromise = getPopularMovies();
+
     const trendingMoviesPromise = getTrendingMovies();
 
     const [popularMovies, trendingMovies] = await Promise.all([
