@@ -1,13 +1,15 @@
 import { redirect } from 'next/navigation';
+import { SearchParams } from 'nuqs/server';
+import { loadProfileParams } from '../_components/_params/ProfileParams';
 
-export default async function LoadingRedirect({
-    searchParams,
-}: {
-    searchParams: { profile: string };
-}) {
-    // Add artificial delay
+type PageProps = {
+    profileParams: Promise<SearchParams>
+}
+
+export default async function LoadingRedirect({ profileParams }: PageProps) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // Redirect to the actual browse page
-    redirect(`/browse?profile=${searchParams.profile}`);
+    const { profile } = await loadProfileParams(profileParams)
+
+    redirect(`/browse?profile=${profile}`);
 } 
