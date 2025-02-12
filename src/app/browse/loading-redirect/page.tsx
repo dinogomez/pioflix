@@ -3,13 +3,14 @@ import { SearchParams } from 'nuqs/server';
 import { loadProfileParams } from '../_components/_params/ProfileParams';
 
 type PageProps = {
-    profileParams: Promise<SearchParams>
+    searchParams: { [key: string]: string | string[] | undefined }
+    params: { [key: string]: string | string[] }
 }
 
-export default async function LoadingRedirect({ profileParams }: PageProps) {
+export default async function LoadingRedirect({ searchParams }: PageProps) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const { profile } = await loadProfileParams(profileParams)
+    const { profile } = await loadProfileParams(searchParams as SearchParams)
 
     redirect(`/browse?profile=${profile}`);
 } 
