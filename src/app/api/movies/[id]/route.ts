@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   try {
     const [movieResponse, creditsResponse] = await Promise.all([
       fetch(
-        `${process.env.TMDB_API_BASE_URL}/movie/${params.id}?language=en-US`,
+        `${process.env.TMDB_API_BASE_URL}/movie/${context.params.id}?language=en-US`,
         {
           headers: {
             Authorization: `Bearer ${process.env.TMDB_API_READ_ACCESS_TOKEN}`,
@@ -16,7 +16,7 @@ export async function GET(
         }
       ),
       fetch(
-        `${process.env.TMDB_API_BASE_URL}/movie/${params.id}/credits?language=en-US`,
+        `${process.env.TMDB_API_BASE_URL}/movie/${context.params.id}/credits?language=en-US`,
         {
           headers: {
             Authorization: `Bearer ${process.env.TMDB_API_READ_ACCESS_TOKEN}`,
