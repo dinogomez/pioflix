@@ -12,7 +12,7 @@ export default async function TvPage() {
         trendingTvPromise
     ]);
     const validPopularTv = (popularTv || [])
-        .filter((show: Show) => show?.backdrop_path && show?.name);
+        .filter((show: Show) => show?.backdrop_path && show?.name && show?.overview);
 
     const validTrendingTv = (trendingTv || [])
         .filter((show: Show) => show?.poster_path && show?.name);
@@ -27,17 +27,17 @@ export default async function TvPage() {
                 <HeroSection content={randomHeroShow} />
             )}
 
-            {validPopularTv.length > 0 && (
-                <MediaGrid
-                    title="Popular TV Shows"
-                    items={validPopularTv}
-                />
-            )}
-
             {validTrendingTv.length > 0 && (
                 <MediaGrid
                     title="Trending TV Shows"
                     items={validTrendingTv}
+                />
+            )}
+
+            {validPopularTv.length > 0 && (
+                <MediaGrid
+                    title="Popular TV Shows"
+                    items={validPopularTv}
                 />
             )}
         </main>
