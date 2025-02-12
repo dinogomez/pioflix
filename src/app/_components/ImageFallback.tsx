@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 interface ImageFallbackProps {
     src: string;
     fallbackSrc: string;
-    [key: string]: any;
+    [key: string]: string;
 }
 
 const ImageFallback: React.FC<ImageFallbackProps> = (props) => {

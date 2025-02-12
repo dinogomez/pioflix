@@ -5,14 +5,12 @@ import { Show } from "@/types/show";
 import { SearchParams } from "nuqs/server";
 import { loadSearchParams } from "./_params/SearchParams";
 
-
 type PageProps = {
-    searchParams: Promise<SearchParams>
-}
-
+    searchParams: Promise<SearchParams>;
+};
 
 export default async function SearchPage({ searchParams }: PageProps) {
-    const { q } = await loadSearchParams(searchParams)
+    const { q } = await loadSearchParams(searchParams);
 
     if (!q) {
         return (
@@ -32,26 +30,18 @@ export default async function SearchPage({ searchParams }: PageProps) {
     return (
         <main className="min-h-screen bg-background pt-5">
             <div className="max-w-7xl mx-auto px-4">
-
-
                 {movies.length > 0 && (
-                    <MediaGrid
-                        title="Movies"
-                        items={movies as Movie[]}
-                    />
+                    <MediaGrid title="Movies" items={movies as Movie[]} />
                 )}
 
                 {tvShows.length > 0 && (
-                    <MediaGrid
-                        title="TV Shows"
-                        items={tvShows as Show[]}
-                    />
+                    <MediaGrid title="TV Shows" items={tvShows as Show[]} />
                 )}
 
                 {movies.length === 0 && tvShows.length === 0 && (
                     <div className="pt-20">
                         <div className="text-center text-muted-foreground text-xl">
-                            No results found for "{String(q)}"
+                            No results found for &ldquo;{String(q)}&rdquo;
                         </div>
                     </div>
                 )}
