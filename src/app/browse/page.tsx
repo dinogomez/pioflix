@@ -1,9 +1,8 @@
 import { getPopularMovies, getPopularTv } from "@/lib/tmdb";
-import { Suspense } from "react";
 import HeroSection from "../_components/hero-section";
 import { MediaGrid } from "../_components/media-grid";
 
-async function BrowsePage() {
+export default async function BrowsePage() {
     const popularMoviesPromise = getPopularMovies();
     const popularTvPromise = getPopularTv();
 
@@ -12,38 +11,33 @@ async function BrowsePage() {
         popularTvPromise,
     ]);
 
-    const allContent = [...popularMovies, ...popularTv];
+    const allContent = [...(popularMovies || []), ...(popularTv || [])].filter(
+        (content) => content?.backdrop_path && (content?.title || content?.name)
+    );
+
     const randomHeroContent =
-        allContent[Math.floor(Math.random() * allContent.length)];
+        allContent.length > 0
+            ? allContent[Math.floor(Math.random() * allContent.length)]
+            : null;
 
     return (
         <main className="min-h-screen bg-background pt-5">
-            <HeroSection
-                imageSrc={`https://image.tmdb.org/t/p/original${randomHeroContent.backdrop_path}`}
-                title={randomHeroContent.title || randomHeroContent.name}
-                overview={randomHeroContent.overview}
-            />
-            <Suspense
-                fallback={
-                    <MediaGrid title="Popular Movies" items={[]} limit={8} isLoading={true} />
-                }
-            >
+            {randomHeroContent && (
+                <HeroSection
+                    imageSrc={`https://image.tmdb.org/t/p/original${randomHeroContent.backdrop_path}`}
+                    title={randomHeroContent.title || randomHeroContent.name}
+                    overview={randomHeroContent.overview}
+                />
+            )}
+
+            {popularMovies?.length > 0 && (
                 <MediaGrid title="Popular Movies" items={popularMovies} limit={8} />
-            </Suspense>
-            <Suspense
-                fallback={
-                    <MediaGrid
-                        title="Popular TV Shows"
-                        items={[]}
-                        limit={8}
-                        isLoading={true}
-                    />
-                }
-            >
+            )}
+
+            {popularTv?.length > 0 && (
                 <MediaGrid title="Popular TV Shows" items={popularTv} limit={8} />
-            </Suspense>
+            )}
         </main>
     );
 }
 
-export default BrowsePage;

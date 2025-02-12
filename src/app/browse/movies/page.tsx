@@ -1,41 +1,54 @@
 import { getPopularMovies, getTrendingMovies } from '@/lib/tmdb';
-import { Suspense } from "react";
+import { Movie } from '@/types/movie';
 import HeroSection from "../../_components/hero-section";
 import { MediaGrid } from "../../_components/media-grid";
 
-async function MoviesPage() {
+export default async function MoviesPage() {
     const popularMoviesPromise = getPopularMovies();
     const trendingMoviesPromise = getTrendingMovies();
 
-    const [popularMovies, trendingMovies] = await Promise.all([
+    const [popularMovies, trendingMovies]: [Movie[], Movie[]] = await Promise.all([
         popularMoviesPromise,
         trendingMoviesPromise
     ]);
 
-    const randomHeroMovie = popularMovies[Math.floor(Math.random() * popularMovies.length)];
+    const validPopularMovies = (popularMovies || [])
+        .filter((movie: Movie) => movie?.backdrop_path && movie?.title);
+
+    const validTrendingMovies = (trendingMovies || [])
+        .filter((movie: Movie) => movie?.poster_path && movie?.title);
+
+    const randomHeroMovie: Movie | null = validPopularMovies.length > 0
+        ? validPopularMovies[Math.floor(Math.random() * validPopularMovies.length)]
+        : null;
 
     return (
         <main className="min-h-screen bg-background pt-5">
-            <HeroSection
-                imageSrc={`https://image.tmdb.org/t/p/original${randomHeroMovie.backdrop_path}`}
-                title={randomHeroMovie.title}
-                overview={randomHeroMovie.overview}
-            />
-            <Suspense fallback={<MediaGrid title="Trending Now" items={[]} isLoading={true} />}>
+            {randomHeroMovie && (
+                <HeroSection
+                    imageSrc={`https://image.tmdb.org/t/p/original${randomHeroMovie.backdrop_path}`}
+                    title={randomHeroMovie.title}
+                    overview={randomHeroMovie.overview}
+                />
+            )}
+
+            {validTrendingMovies.length > 0 && (
                 <MediaGrid
                     title="Trending Now"
-                    items={trendingMovies}
+                    items={validTrendingMovies}
                 />
-            </Suspense>
-            <MediaGrid
-                title="Popular Movies"
-                items={popularMovies}
-            />
+            )}
+
+            {validPopularMovies.length > 0 && (
+                <MediaGrid
+                    title="Popular Movies"
+                    items={validPopularMovies}
+                />
+            )}
         </main>
     );
 }
 
-export default MoviesPage;
 
 
 

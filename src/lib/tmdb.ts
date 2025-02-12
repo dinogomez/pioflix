@@ -1,41 +1,94 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://pioflix.vercel.app/"
+    ? `https://${process.env.VERCEL_URL}`
     : "http://localhost:3000";
 
 export async function getPopularMovies() {
-  const res = await fetch(
-    `${baseUrl}/movie/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`
-  );
-  const data = await res.json();
-  return data.results;
+  try {
+    const res = await fetch(`${baseUrl}/api/movies/popular`, {
+      next: { revalidate: 1800 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching popular movies:", error);
+    return [];
+  }
 }
 
 export async function getTrendingMovies() {
-  const res = await fetch(
-    `${process.env.TMDB_API_BASE_URL}/trending/movie/day?api_key=${process.env.TMDB_API_KEY}&language=en-US`
-  );
-  const data = await res.json();
-  return data.results;
+  try {
+    const res = await fetch(`${baseUrl}/api/movies/trending`, {
+      next: { revalidate: 1800 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching trending movies:", error);
+    return [];
+  }
 }
+
 export async function getPopularTv() {
-  const res = await fetch(
-    `${process.env.TMDB_API_BASE_URL}/tv/popular?api_key=${process.env.TMDB_API_KEY}&language=en-US&page=1`
-  );
-  const data = await res.json();
-  return data.results;
+  try {
+    const res = await fetch(`${baseUrl}/api/tv/popular`, {
+      next: { revalidate: 1800 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching popular TV shows:", error);
+    return [];
+  }
 }
 
 export async function getTrendingTv() {
-  const res = await fetch(
-    `${process.env.TMDB_API_BASE_URL}/trending/tv/day?api_key=${process.env.TMDB_API_KEY}&language=en-US`
-  );
-  const data = await res.json();
-  return data.results;
+  try {
+    const res = await fetch(`${baseUrl}/api/tv/trending`, {
+      next: { revalidate: 1800 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching trending TV shows:", error);
+    return [];
+  }
 }
 
 export async function getSearchResults(query: string) {
-  const res = await fetch(`${baseUrl}/api/search?query=${query}`);
-  const data = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${baseUrl}/api/search?query=${query}`, {
+      next: { revalidate: 60 },
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    return [];
+  }
 }

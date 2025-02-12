@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 
-const BASE_URL = "https://api.themoviedb.org/3";
-
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const query = searchParams.get("query");
@@ -13,7 +11,7 @@ export async function GET(request: Request) {
   try {
     const [moviesResponse, tvShowsResponse] = await Promise.all([
       fetch(
-        `${BASE_URL}/search/movie?query=${query}&language=en-US&page=1&sort_by=popularity.desc`,
+        `${process.env.TMDB_API_BASE_URL}/search/movie?query=${query}&language=en-US&page=1&sort_by=popularity.desc`,
         {
           headers: {
             Authorization: `Bearer ${process.env.TMDB_API_READ_ACCESS_TOKEN}`,
@@ -22,7 +20,7 @@ export async function GET(request: Request) {
         }
       ),
       fetch(
-        `${BASE_URL}/search/tv?query=${query}&language=en-US&page=1&sort_by=popularity.desc`,
+        `${process.env.TMDB_API_BASE_URL}/search/tv?query=${query}&language=en-US&page=1&sort_by=popularity.desc`,
         {
           headers: {
             Authorization: `Bearer ${process.env.TMDB_API_READ_ACCESS_TOKEN}`,
