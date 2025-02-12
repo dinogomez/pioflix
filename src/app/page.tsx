@@ -8,7 +8,7 @@ import Image from 'next/image'
 export default function ProfileSelection() {
   return (
     <main className="min-h-screen text-white flex flex-col items-center justify-center">
-      <h1 className="text-4xl mb-12">Who's watching?</h1>
+      <h1 className="text-4xl mb-12">Who&apos;s watching?</h1>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {profiles.map((profile) => (
