@@ -1,7 +1,5 @@
-"use client";
-
 import Loader from "@/components/ui/loader";
 
-export default function SearchLoading() {
+export default function MoviesLoading() {
     return <Loader />;
 } 

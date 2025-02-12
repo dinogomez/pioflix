@@ -32,7 +32,7 @@ async function fetchFromApi<T>(
 export async function getPopularMovies(): Promise<Movie[]> {
   return (
     (await fetchFromApi<Movie[]>(
-      "/api/movies/popular",
+      "/api/movie/popular",
       1800,
       "Error fetching popular movies:"
     )) || []
@@ -42,7 +42,7 @@ export async function getPopularMovies(): Promise<Movie[]> {
 export async function getTrendingMovies(): Promise<Movie[]> {
   return (
     (await fetchFromApi<Movie[]>(
-      "/api/movies/trending",
+      "/api/movie/trending",
       1800,
       "Error fetching trending movies:"
     )) || []
@@ -83,7 +83,7 @@ export async function getSearchResults(
 
 export async function getMovieDetails(id: string): Promise<Movie | null> {
   return await fetchFromApi<Movie>(
-    `/api/movies/${id}`,
+    `/api/movie/${id}`,
     3600,
     "Error fetching movie details:"
   );
