@@ -23,7 +23,7 @@ export async function GET(
 
     const randomContent = content[Math.floor(Math.random() * content.length)];
     return NextResponse.json(randomContent);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
