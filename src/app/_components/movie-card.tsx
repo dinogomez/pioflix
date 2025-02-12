@@ -63,7 +63,7 @@ export default function MovieCard({ content }: MovieCardProps) {
                                 {!isMovie && (content as Show).number_of_seasons && (
                                     <span className="flex items-center mr-4">
                                         <Tv className="w-4 h-4 mr-1" />
-                                        {(content as Show).number_of_seasons} Seasons
+                                        {(content as Show).number_of_seasons} {(content as Show).number_of_seasons === 1 ? 'Season' : 'Seasons'}
                                     </span>
                                 )}
                                 <span className="flex items-center">

@@ -1,3 +1,4 @@
+import { Movie } from "@/types/movie";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -15,7 +16,7 @@ export async function GET() {
     const data = await response.json();
 
     const moviesWithDetails = await Promise.all(
-      data.results.map(async (movie: any) => {
+      data.results.map(async (movie: Movie) => {
         const detailsResponse = await fetch(
           `${process.env.TMDB_API_BASE_URL}/movie/${movie.id}?language=en-US`,
           {

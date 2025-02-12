@@ -1,3 +1,4 @@
+import { Show } from "@/types/show";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -15,7 +16,7 @@ export async function GET() {
     const data = await response.json();
 
     const showsWithDetails = await Promise.all(
-      data.results.map(async (show: any) => {
+      data.results.map(async (show: Show) => {
         const detailsResponse = await fetch(
           `${process.env.TMDB_API_BASE_URL}/tv/${show.id}?language=en-US`,
           {
