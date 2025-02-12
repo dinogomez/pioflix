@@ -68,7 +68,7 @@ export default function ContentDetail({ content }: ContentDetailProps) {
                 <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
             </div>
 
-            <div className="relative z-10 px-4 lg:px-8 -mt-32">
+            <div className="relative z-10 px-4 lg:px-6 -mt-32">
                 <div className="flex flex-col md:flex-row gap-8">
                     {/* Poster */}
                     <div className="w-full md:w-1/4">
@@ -201,31 +201,33 @@ export default function ContentDetail({ content }: ContentDetailProps) {
             </div>
 
             {/* Additional Content Sections */}
-            <div className="mt-16 space-y-12">
+            <div className="mt-16 space-y-12 px-4 lg:px-6">
                 {/* Cast & Crew Section */}
-                <section>
-                    <h2 className="text-2xl font-bold mb-6">Cast & Crew</h2>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        {content.credits?.cast?.slice(0, 6).map((person) => (
-                            <div key={person.id} className="space-y-2">
-                                <AspectRatio ratio={2 / 3}>
-                                    <ImageFallback
-                                        src={person.profile_path
-                                            ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
-                                            : "/placeholder-avatar.png"}
-                                        alt={person.name}
-                                        fill
-                                        className="rounded-lg object-cover"
-                                    />
-                                </AspectRatio>
-                                <div>
-                                    <p className="font-medium line-clamp-1">{person.name}</p>
-                                    <p className="text-sm text-muted-foreground line-clamp-1">{person.character}</p>
+                {content.credits?.cast && content.credits.cast.length > 0 && (
+                    <section>
+                        <h2 className="text-2xl font-bold mb-6">Cast & Crew</h2>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                            {content.credits.cast.slice(0, 6).map((person) => (
+                                <div key={person.id} className="space-y-2">
+                                    <AspectRatio ratio={2 / 3}>
+                                        <ImageFallback
+                                            src={person.profile_path
+                                                ? `https://image.tmdb.org/t/p/w500${person.profile_path}`
+                                                : "/placeholder-avatar.png"}
+                                            alt={person.name}
+                                            fill
+                                            className="rounded-lg object-cover"
+                                        />
+                                    </AspectRatio>
+                                    <div>
+                                        <p className="font-medium line-clamp-1">{person.name}</p>
+                                        <p className="text-sm text-muted-foreground line-clamp-1">{person.character}</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
+                            ))}
+                        </div>
+                    </section>
+                )}
 
                 {/* Similar Content Section */}
                 <section className="pb-4">
