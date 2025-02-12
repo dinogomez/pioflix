@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/dinogomez/imdb-coding-challenge/refs/heads/develop/public/pioflix.png?token=GHSAT0AAAAAAC6LSAOM4HQHQHFJTTIYNIDUZ5M2HBA" alt="Pioflix Screenshot" />
+  <img src="https://i.imgur.com/I5K1BoL.png" alt="Pioflix Screenshot" />
 </div>
 
 # PIOFLIX - IMDB CODING CHALLENGE
