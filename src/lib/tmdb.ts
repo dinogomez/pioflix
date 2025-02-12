@@ -1,6 +1,6 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://pioflix.vercel.app"
+    ? `https://${process.env.VERCEL_URL}`
     : "http://localhost:3000";
 
 export async function getPopularMovies() {
