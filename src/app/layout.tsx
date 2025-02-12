@@ -1,9 +1,9 @@
+import Loader from "@/components/ui/loader";
 import type { Metadata } from "next";
 import { ViewTransitions } from 'next-view-transitions';
 import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 import { Suspense } from "react";
-import Loader from "./browse/_components/loader";
 import "./globals.css";
 
 const geistSans = Geist({

@@ -18,7 +18,7 @@ A modern, responsive movie and TV show discovery platform built with Next.js 15,
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: Next.js 15 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **State Management**: nuqs (URL State)
