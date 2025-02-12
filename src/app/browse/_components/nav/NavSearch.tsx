@@ -38,7 +38,7 @@ export function NavSearch({ isSearchOpen, setIsSearchOpen, searchQuery, setSearc
                     {isSearchOpen && (
                         <motion.div
                             initial={{ width: 0, opacity: 0 }}
-                            animate={{ width: "285px", opacity: 1 }}
+                            animate={{ width: "300px", opacity: 1 }}
                             exit={{ width: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
                             className="absolute right-0"
