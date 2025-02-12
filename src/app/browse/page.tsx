@@ -1,20 +1,47 @@
-"use client";
+import { getPopularMovies, getPopularTv } from "@/lib/tmdb";
+import { headers } from "next/headers";
+import HeroSection from "./_components/hero-section";
+import { MediaGrid } from "./_components/media-grid";
 
-import { parseAsInteger, useQueryState } from "nuqs";
-import { Navbar } from "./_components/navbar";
+export default async function BrowsePage() {
+    const headersList = await headers();
+    const referer = headersList.get("referer");
+    const isFromHomePage = referer?.endsWith("/");
 
-export default function BrowsePage() {
-  const [profile] = useQueryState("profile", parseAsInteger.withDefault(1));
+    if (isFromHomePage) {
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+    }
 
-  return (
-    <>
-      <Navbar />
-      <main className="pt-16">
-        <div className="max-w-7xl mx-auto px-4">
-          {/* Your browse page content */}
-          <div>Current Profile ID: {profile}</div>
-        </div>
-      </main>
-    </>
-  );
+    const popularMoviesPromise = getPopularMovies();
+    const popularTvPromise = getPopularTv();
+
+    const [popularMovies, popularTv] = await Promise.all([
+        popularMoviesPromise,
+        popularTvPromise,
+    ]);
+
+    const allContent = [...(popularMovies || []), ...(popularTv || [])].filter(
+        (content) =>
+            content?.backdrop_path &&
+            ("title" in content ? content.title : content.name)
+    );
+
+    const randomHeroContent =
+        allContent.length > 0
+            ? allContent[Math.floor(Math.random() * allContent.length)]
+            : null;
+
+    return (
+        <main className="min-h-screen bg-background pt-5">
+            {randomHeroContent && <HeroSection content={randomHeroContent} />}
+
+            {popularMovies?.length > 0 && (
+                <MediaGrid title="Popular Movies" items={popularMovies} limit={8} />
+            )}
+
+            {popularTv?.length > 0 && (
+                <MediaGrid title="Popular TV Shows" items={popularTv} limit={8} />
+            )}
+        </main>
+    );
 }

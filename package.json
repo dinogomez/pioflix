@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:debug": "NODE_OPTIONS='--inspect' next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -43,9 +44,12 @@
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.5.2",
     "input-otp": "^1.4.2",
+    "install": "^0.13.0",
     "lucide-react": "^0.475.0",
+    "motion": "^12.4.2",
     "next": "15.1.6",
     "next-themes": "^0.4.4",
+    "next-view-transitions": "^0.3.4",
     "nuqs": "^2.3.2",
     "react": "^19.0.0",
     "react-day-picker": "8.10.1",

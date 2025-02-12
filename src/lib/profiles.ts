@@ -1,4 +1,6 @@
-export const profiles = [
+import { Profile } from "@/types/profile";
+
+export const profiles: Profile[] = [
   {
     id: 1,
     name: "Stephen",
@@ -12,11 +14,11 @@ export const profiles = [
   {
     id: 3,
     name: "Jay",
-    image: "/avatar/rouge.png",
+    image: "/avatar/heimer.png",
   },
   {
     id: 4,
     name: "Paul",
-    image: "/avatar/rebel_rouge.png",
+    image: "/avatar/squid.png",
   },
 ];
