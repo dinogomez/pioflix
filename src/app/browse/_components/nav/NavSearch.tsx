@@ -1,7 +1,6 @@
 import { SearchIcon, SearchIconHandle } from "@/components/icons/search-icon";
 import { Input } from "@/components/ui/input";
 import { AnimatePresence, motion } from "framer-motion";
-import { X } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 interface NavSearchProps {
@@ -42,7 +41,7 @@ export function NavSearch({ isSearchOpen, setIsSearchOpen, searchQuery, setSearc
                             animate={{ width: "285px", opacity: 1 }}
                             exit={{ width: 0, opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="absolute right-10"
+                            className="absolute right-0"
                         >
                             <div className="relative">
                                 <SearchIcon
@@ -60,14 +59,7 @@ export function NavSearch({ isSearchOpen, setIsSearchOpen, searchQuery, setSearc
                         </motion.div>
                     )}
                 </AnimatePresence>
-                {isSearchOpen ? (
-                    <button
-                        onClick={() => setIsSearchOpen(false)}
-                        className="p-2 rounded-full transition !bg-transparent"
-                    >
-                        <X className="h-6 w-6" />
-                    </button>
-                ) : (
+                {!isSearchOpen && (
                     <SearchIcon className="hover:bg-transparent" onClick={() => setIsSearchOpen(true)} />
                 )}
             </div>
