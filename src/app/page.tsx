@@ -1,11 +1,13 @@
 // app/page.tsx
-import { profiles } from "@/lib/profiles"
-import { Link } from 'next-view-transitions'
-import ImageFallback from "./_components/ImageFallback"
+import { profiles } from "@/lib/profiles";
+import { Link } from 'next-view-transitions';
+import ImageFallback from "./_components/ImageFallback";
 
 
 
-export default function ProfileSelection() {
+export default async function ProfileSelection() {
+
+
   return (
     <main className="min-h-screen text-white flex flex-col items-center justify-center">
       <h1 className="text-4xl mb-12">Who&apos;s watching?</h1>
@@ -13,11 +15,11 @@ export default function ProfileSelection() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {profiles.map((profile) => (
           <Link
-            href={`/browse?profile=${profile.id}`}
+            href={`/browse/loading-redirect?profile=${profile.id}`}
             key={profile.id}
             className="group flex flex-col items-center gap-3"
           >
-            <div className="relative w-32 h-32 overflow-hidden rounded-lg group-hover:ring-4 ring-white transition-all">
+            <div className="relative w-40 h-40 overflow-hidden rounded-lg group-hover:ring-4 ring-white transition-all">
               <ImageFallback
                 src={profile.image}
                 alt={profile.name ? profile.name : "profile avatar"}
