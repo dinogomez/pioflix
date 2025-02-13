@@ -17,7 +17,7 @@ export default function NotFound() {
                     size="lg"
                     className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-2xl rounded-none px-12 py-6"
                 >
-                    Netflix Home
+                    Pioflix Home
                 </Button>
             </Link>
         </main>
